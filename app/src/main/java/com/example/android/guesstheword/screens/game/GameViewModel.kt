@@ -24,6 +24,10 @@ class GameViewModel : ViewModel() {
         _eventGameFinish.value = true
     }
 
+    fun onGameFinishComplete(){
+        _eventGameFinish.value = false
+    }
+
 
     private fun resetList() {
         wordList = mutableListOf(
