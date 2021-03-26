@@ -16,6 +16,15 @@ class GameViewModel : ViewModel() {
 
     private lateinit var wordList: MutableList<String>
 
+    private val _eventGameFinish = MutableLiveData<Boolean>()
+    val eventGameFinish : LiveData<Boolean>
+        get() = _eventGameFinish
+
+    fun onGameFinish() {
+        _eventGameFinish.value = true
+    }
+
+
     private fun resetList() {
         wordList = mutableListOf(
                 "queen",
@@ -52,11 +61,11 @@ class GameViewModel : ViewModel() {
     }
 
     private fun nextWord() {
-        if (!wordList.isEmpty()) {
-            //Select and remove a word from the list
+        if (wordList.isEmpty()) {
+            onGameFinish()
+        }else{
             _word.value = wordList.removeAt(0)
         }
-
     }
 
     fun onSkip() {
